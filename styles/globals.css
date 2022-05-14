@@ -2,23 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
+/* sidebar */
 ol.nested {
   counter-reset: item;
 }
@@ -34,3 +18,72 @@ ol.nested li:before {
   counter-increment: item;
 }
 
+pre {
+  font-family: "Jetbrains Mono", monospace;
+  background-color: #272822 !important;
+  border-radius: unset  !important;
+  @apply -mr-5 -ml-5
+}
+
+
+@media (min-width: 768px) {
+  pre {
+    border-radius: 0.375rem !important;
+  }
+}
+
+pre > code {
+  counter-reset: line;
+  display: grid;
+}
+
+code[data-line-numbers] > .line::before {
+  counter-increment: line;
+  content: counter(line);
+  color: gray;
+  margin-right: 1rem;
+}
+
+.line {
+  padding-right: 1rem;
+}
+
+.highlight {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: calc(1rem - 5px);
+  border-left-width: 5px;
+  background: rgba(200, 200, 255, 0.1);
+  border-color: #60a5fa;
+}
+
+div[data-rehype-pretty-code-title] {
+  @apply -mr-5 -ml-5 md:rounded-t  px-4 py-3 font-mono text-sm font-bold text-gray-200;
+  background-color: #30322a;
+}
+
+div[data-rehype-pretty-code-title] + div > pre {
+  @apply mt-0;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+
+
+/* <code> */
+:not(pre) > code{
+  color: #ec4899 !important;
+  font-weight: 600;
+  font-size: .875em;
+  background-color: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 0.25rem;
+}
+
+:not(pre) > code::before{
+  content: none !important;
+}
+
+:not(pre) > code::after{
+  content: none !important;
+}
