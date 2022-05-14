@@ -67,20 +67,15 @@ function SidebarLogo() {
         </div>
       </a>
       <div className="mt-5 px-4">
-        <label forHtml="version" className="sr-only">
-          Version
-        </label>
+        <label className="sr-only">Version</label>
         <div className="mt-1 sm:mt-0 sm:col-span-2">
           <div className="max-w-xs rounded-md shadow-sm">
             <select
               id="version"
               className="block rounded border-gray-300 w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!"
-              autoComplete="off"
             >
               <option value="main">main</option>
-              <option selected="" value="v1.21.3">
-                v1.21.3
-              </option>
+              <option value="v1.21.3">v1.21.3</option>
               <option value="v1.21.2">v1.21.2</option>
             </select>
           </div>
@@ -95,10 +90,7 @@ function SidebarMobile({ show, toggleShow, children }) {
     <div className={`md:hidden ${show ? "" : "hidden"}`} id="manualSidebar">
       <div className="fixed inset-0 flex z-40">
         <div className="fixed inset-0">
-          <label
-            className="absolute inset-0 bg-gray-600 opacity-75"
-            forHtml="manualSidebarToggle"
-          ></label>
+          <label className="absolute inset-0 bg-gray-600 opacity-75"></label>
         </div>
         <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
           <div className="absolute top-0 right-0 -mr-14 p-1">
@@ -106,7 +98,6 @@ function SidebarMobile({ show, toggleShow, children }) {
               className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
               aria-label="Close sidebar"
               onClick={toggleShow}
-              forHtml="manualSidebarToggle"
             >
               <svg
                 className="h-6 w-6 text-white"
@@ -115,9 +106,9 @@ function SidebarMobile({ show, toggleShow, children }) {
                 viewBox="0 0 24 24"
               >
                 <path
-                  strokelinecap="round"
-                  strokelinejoin="round"
-                  strokewidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
                 ></path>
               </svg>
@@ -171,15 +162,13 @@ function HeaderDesktop() {
   return (
     <div className="h-16 bg-white shadow hidden md:block">
       <div className="max-w-screen-md mx-auto px-12 w-full flex justify-between h-full">
-        <label forHtml="search_field" className="sr-only">
-          Search
-        </label>
+        <label className="sr-only">Search</label>
         <button className="w-full text-gray-400 focus-within:text-gray-600 flex items-center">
           <div className="flex items-center pointer-events-none">
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path
-                fillrule="evenodd"
-                cliprule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
               ></path>
             </svg>
@@ -206,9 +195,7 @@ function HeaderMobile({ toggleShow }) {
       <div className="border-l border-r border-gray-200 flex-1 px-4 flex justify-between">
         <div className="flex-1 flex">
           <div className="w-full flex justify-between h-full">
-            <label forHtml="search_field" className="sr-only">
-              Search
-            </label>
+            <label className="sr-only">Search</label>
             <button className="w-full text-gray-400 focus-within:text-gray-600 flex items-center">
               <div className="flex items-center pointer-events-none">
                 <svg
@@ -217,8 +204,8 @@ function HeaderMobile({ toggleShow }) {
                   viewBox="0 0 20 20"
                 >
                   <path
-                    fillrule="evenodd"
-                    cliprule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
                   ></path>
                 </svg>
@@ -239,7 +226,6 @@ function HeaderMobile({ toggleShow }) {
       </div>
       <label
         className="focus:outline-none focus:bg-gray-100 md:hidden flex items-center"
-        forHtml="manualSidebarToggle"
         onClick={toggleShow}
       >
         <div className="px-4 text-gray-500 focus:text-gray-600">
@@ -250,9 +236,9 @@ function HeaderMobile({ toggleShow }) {
             viewBox="0 0 24 24"
           >
             <path
-              strokelinecap="round"
-              strokelinejoin="round"
-              strokewidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M4 6h16M4 12h16M4 18h7"
             ></path>
           </svg>

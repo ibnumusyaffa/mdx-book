@@ -34,7 +34,7 @@ export async function getPost(root, slug) {
   let source = await readFile(filePath, "utf8");
   let mdxResult = await bundleMDX({
     source,
-    // cwd: isFile ? undefined : path.join(root, slug),
+    cwd: undefined,
     mdxOptions(options) {
       options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkGfm];
       options.rehypePlugins = [
