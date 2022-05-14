@@ -1,6 +1,79 @@
 import Head from "next/head";
 import React from "react";
-function SidebarMobile({ show, toggleShow }) {
+
+function TableOfContents() {
+  return (
+    <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
+      <nav className="flex-1 px-4">
+        <ol className="list-decimal list-inside font-semibold nested">
+          <li className="my-2">
+            <a
+              href="/manual/introduction"
+              className="text-blue-600 hover:text-blue-500 toc-active font-bold"
+            >
+              Introduction
+            </a>
+          </li>
+          <li className="my-2">
+            <a
+              href="/manual/getting_started"
+              className="text-gray-900 hover:text-gray-600 font-bold"
+            >
+              Getting Started
+            </a>
+            <ol className="pl-4 list-decimal nested">
+              <li className="my-0.5">
+                <a
+                  href="/manual/getting_started/installation"
+                  className="text-gray-900 hover:text-gray-600 font-normal"
+                >
+                  Installation
+                </a>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  );
+}
+
+function SidebarLogo() {
+  return (
+    <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
+      <a className="flex items-center flex-shrink-0 px-4">
+        <img src="/logo.svg" alt="logo" className="w-auto h-12" />
+        <div className="mx-4 flex flex-col justify-center">
+          <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
+            Deno Manual
+          </div>
+        </div>
+      </a>
+      <div className="mt-5 px-4">
+        <label forHtml="version" className="sr-only">
+          Version
+        </label>
+        <div className="mt-1 sm:mt-0 sm:col-span-2">
+          <div className="max-w-xs rounded-md shadow-sm">
+            <select
+              id="version"
+              className="block rounded border-gray-300 w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!"
+              autoComplete="off"
+            >
+              <option value="main">main</option>
+              <option selected="" value="v1.21.3">
+                v1.21.3
+              </option>
+              <option value="v1.21.2">v1.21.2</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SidebarMobile({ show, toggleShow, children }) {
   return (
     <div className={`md:hidden ${show ? "" : "hidden"}`} id="manualSidebar">
       <div className="fixed inset-0 flex z-40">
@@ -33,69 +106,8 @@ function SidebarMobile({ show, toggleShow }) {
               </svg>
             </label>
           </div>
-          <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-            <a className="flex items-center flex-shrink-0 px-4">
-              <img src="/logo.svg" alt="logo" className="w-auto h-12" />
-              <div className="mx-4 flex flex-col justify-center">
-                <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                  Deno Manual
-                </div>
-              </div>
-            </a>
-            <div className="mt-5 px-4">
-              <label forHtml="version" className="sr-only">
-                Version
-              </label>
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <div className="max-w-xs rounded-md shadow-sm">
-                  <select
-                    id="version"
-                    className="block form-select w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!"
-                    autoComplete="off"
-                  >
-                    <option value="main">main</option>
-                    <option selected="" value="v1.21.3">
-                      v1.21.3
-                    </option>
-                    <option value="v1.21.2">v1.21.2</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
-            <nav className="flex-1 px-4">
-              <ol className="list-decimal list-inside font-semibold nested">
-                <li className="my-2">
-                  <a
-                    href="/manual/introduction"
-                    className="text-blue-600 hover:text-blue-500 toc-active font-bold"
-                  >
-                    Introduction
-                  </a>
-                </li>
-                <li className="my-2">
-                  <a
-                    href="/manual/getting_started"
-                    className="text-gray-900 hover:text-gray-600 font-bold"
-                  >
-                    Getting Started
-                  </a>
-                  <ol className="pl-4 list-decimal nested">
-                    <li className="my-0.5">
-                      <a
-                        href="/manual/getting_started/installation"
-                        className="text-gray-900 hover:text-gray-600 font-normal"
-                      >
-                        Installation
-                      </a>
-                    </li>
-                    
-                  </ol>
-                </li>
-              </ol>
-            </nav>
-          </div>
+          <SidebarLogo></SidebarLogo>
+          {children}
         </div>
         <div className="flex-shrink-0 w-14"></div>
       </div>
@@ -103,71 +115,12 @@ function SidebarMobile({ show, toggleShow }) {
   );
 }
 
-function SidebarDesktop() {
+function SidebarDesktop({ children }) {
   return (
     <div className="hidden md:flex md:flex-shrink-0">
       <div className="flex flex-col w-72 border-r border-gray-200 bg-gray-50">
-        <div className="bg-gray-100 pb-4 pt-4 border-b border-gray-200">
-          <a className="flex items-center flex-shrink-0 px-4">
-            <img src="/logo.svg" alt="logo" className="w-auto h-12" />
-            <div className="mx-4 flex flex-col justify-center">
-              <div className="font-bold text-gray-900 leading-6 text-2xl tracking-tight">
-                Deno Manual
-              </div>
-            </div>
-          </a>
-          <div className="mt-5 px-4">
-            <label forHtml="version" className="sr-only">
-              Version
-            </label>
-            <div className="mt-1 sm:mt-0 sm:col-span-2">
-              <div className="max-w-xs rounded-md shadow-sm">
-                <select
-                  id="version"
-                  className="block rounded border-gray-300 w-full transition duration-150 ease-in-out sm:text-sm! sm:leading-5!"
-                >
-                  <option value="main">main</option>
-                  <option selected="" value="v1.21.3">
-                    v1.21.3
-                  </option>
-                  <option value="v1.21.2">v1.21.2</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
-          <nav className="flex-1 px-4">
-            <ol className="list-decimal list-inside font-semibold nested">
-              <li className="my-2">
-                <a
-                  href="/manual/introduction"
-                  className="text-gray-900 hover:text-gray-600 font-bold"
-                >
-                  Introduction
-                </a>
-              </li>
-              <li className="my-2">
-                <a
-                  href="/manual/getting_started"
-                  className="text-gray-900 hover:text-gray-600 font-bold"
-                >
-                  Getting Started
-                </a>
-                <ol className="pl-4 list-decimal nested">
-                  <li className="my-0.5">
-                    <a
-                      href="/manual/getting_started/installation"
-                      className="text-gray-900 hover:text-gray-600 font-normal"
-                    >
-                      Installation
-                    </a>
-                  </li>
-                </ol>
-              </li>
-            </ol>
-          </nav>
-        </div>
+        <SidebarLogo></SidebarLogo>
+        {children}
       </div>
     </div>
   );
@@ -301,8 +254,12 @@ export default function Home() {
     <div className="h-screen">
       <div>
         <div className="h-screen flex overflow-hidden">
-          <SidebarMobile show={show} toggleShow={toggleShow}></SidebarMobile>
-          <SidebarDesktop></SidebarDesktop>
+          <SidebarMobile show={show} toggleShow={toggleShow}>
+            <TableOfContents></TableOfContents>
+          </SidebarMobile>
+          <SidebarDesktop>
+            <TableOfContents></TableOfContents>
+          </SidebarDesktop>
           {/* content */}
           <div className="flex flex-col w-0 flex-1 overflow-hidden">
             <main
