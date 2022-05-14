@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 html,
 body {
   padding: 0;
@@ -20,3 +18,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+ol.nested {
+  counter-reset: item;
+}
+ol.nested li {
+  display: block;
+}
+ol.nested li:before {
+  font-feature-settings: "kern" 1, "tnum" 1;
+  -webkit-font-feature-settings: "kern" 1, "tnum" 1;
+  -ms-font-feature-settings: "kern" 1, "tnum" 1;
+  -moz-font-feature-settings: "kern" 1, "tnum" 1;
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+}
+
