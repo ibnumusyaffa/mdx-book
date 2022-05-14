@@ -1,37 +1,205 @@
-import Head from "next/head";
 import React from "react";
-
+let toc = {
+  introduction: {
+    name: "Introduction",
+  },
+  getting_started: {
+    name: "Getting Started",
+    children: {
+      installation: "Installation",
+      setup_your_environment: "Set up your environment",
+      first_steps: "First steps",
+      command_line_interface: "Command line interface",
+      configuration_file: "Configuration file",
+      permissions: "Permissions",
+      debugging_your_code: "Debugging your code",
+    },
+  },
+  runtime: {
+    name: "The Runtime",
+    children: {
+      stability: "Stability",
+      program_lifecycle: "Program lifecycle",
+      permission_apis: "Permission APIs",
+      web_platform_apis: "Web Platform APIs",
+      http_server_apis: "HTTP Server APIs",
+      http_server_apis_low_level: "HTTP Server APIs (low level)",
+      location_api: "Location API",
+      web_storage_api: "Web Storage API",
+      workers: "Workers",
+      ffi_api: "Foreign Function Interface API",
+    },
+  },
+  linking_to_external_code: {
+    name: "Linking to external code",
+    children: {
+      reloading_modules: "Reloading modules",
+      integrity_checking: "Integrity checking",
+      proxies: "Proxies",
+      private: "Private modules",
+      import_maps: "Import maps",
+    },
+  },
+  node: {
+    name: "Interoperating with Node and NPM",
+    children: {
+      compatibility_mode: "Node compatibility mode",
+      std_node: "The std/node library",
+      cdns: "Packages from CDNs",
+      import_maps: "Using import maps",
+      faqs: "Frequently asked questions",
+      cheatsheet: "Node->Deno cheatsheet",
+      dnt: "dnt - Deno to Node Transform",
+    },
+  },
+  typescript: {
+    name: "Using TypeScript",
+    children: {
+      overview: "Overview",
+      configuration: "Configuration",
+      types: "Types and type declarations",
+      migration: "Migrating to/from JavaScript",
+      runtime: "Runtime compiler APIs",
+      faqs: "Frequently asked questions",
+    },
+  },
+  jsx_dom: {
+    name: "Using JSX and the DOM",
+    children: {
+      overview: "Overview",
+      jsx: "Configuring JSX",
+      linkedom: "Using LinkeDOM",
+      deno_dom: "Using deno-dom",
+      jsdom: "Using jsdom",
+      css: "Parsing CSS",
+      twind: "Using Twind",
+    },
+  },
+  webassembly: {
+    name: "Using WebAssembly",
+    children: {
+      using_wasm: "Using WebAssembly in Deno",
+      using_streaming_wasm: "Using the streaming WebAssembly APIs",
+      wasm_resources: "Helpful resources",
+    },
+  },
+  standard_library: {
+    name: "Standard library",
+  },
+  examples: {
+    name: "Examples",
+    children: {
+      hello_world: "Hello world",
+      import_export: "Import and export modules",
+      manage_dependencies: "Manage dependencies",
+      fetch_toc: "Fetch data",
+      read_write_files: "Read and write files",
+      unix_cat: "Unix cat program",
+      http_server: "HTTP web server",
+      file_server: "File server",
+      tcp_echo: "TCP echo server",
+      subprocess: "Creating a subprocess",
+      os_signals: "OS signals",
+      file_system_events: "File system events",
+      module_metadata: "Module metadata",
+    },
+  },
+  testing: {
+    name: "Testing",
+    children: {
+      assertions: "Assertions",
+      coverage: "Coverage",
+      documentation: "Documentation",
+      sanitizers: "Sanitizers",
+      behavior_driven_development: "Behavior-driven development",
+      mocking: "Mocking",
+      snapshot_testing: "Snapshots",
+    },
+  },
+  tools: {
+    name: "Tools",
+    children: {
+      script_installer: "Script installer",
+      formatter: "Formatter",
+      repl: "Read-eval-print-loop",
+      bundler: "Bundler",
+      compiler: "Compiling executables",
+      documentation_generator: "Documentation generator",
+      dependency_inspector: "Dependency inspector",
+      linter: "Linter",
+      task_runner: "Task runner",
+      vendor: "Vendoring dependencies",
+      benchmarker: "Benchmarking",
+    },
+  },
+  continuous_integration: {
+    name: "Continuous integration",
+  },
+  vscode_deno: {
+    name: "Using Visual Studio Code",
+    children: {
+      testing_api: "Testing API",
+    },
+  },
+  language_server: {
+    name: "Language Server",
+    children: {
+      overview: "Overview of the language server",
+      imports: "Import suggestions and intelligent registries",
+      testing_api: "Testing API",
+    },
+  },
+  publishing: {
+    name: "Publishing Modules",
+  },
+  embedding_deno: {
+    name: "Embedding Deno",
+  },
+  help: {
+    name: "Help",
+  },
+  contributing: {
+    name: "Contributing",
+    children: {
+      building_from_source: "Building from source",
+      web_platform_tests: "Web platform tests",
+      style_guide: "Style guide",
+      architecture: "Architecture",
+      release_schedule: "Release schedule",
+    },
+  },
+};
 function TableOfContents() {
   return (
     <div className="pt-2 pb-8 h-0 flex-1 flex flex-col overflow-y-auto">
       <nav className="flex-1 px-4">
         <ol className="list-decimal list-inside font-semibold nested">
-          <li className="my-2">
-            <a
-              href="/manual/introduction"
-              className="text-blue-600 hover:text-blue-500 toc-active font-bold"
-            >
-              Introduction
-            </a>
-          </li>
-          <li className="my-2">
-            <a
-              href="/manual/getting_started"
-              className="text-gray-900 hover:text-gray-600 font-bold"
-            >
-              Getting Started
-            </a>
-            <ol className="pl-4 list-decimal nested">
-              <li className="my-0.5">
+          {Object.entries(toc).map(([slug, entry]) => {
+            return (
+              <li key={slug} className="my-2">
                 <a
-                  href="/manual/getting_started/installation"
-                  className="text-gray-900 hover:text-gray-600 font-normal"
+                  href={`/manual/${slug}`}
+                  className="text-gray-900 hover:text-gray-600 font-bold"
                 >
-                  Installation
+                  {entry.name}
                 </a>
+                {entry.children ? (
+                  <ol className="pl-4 list-decimal nested">
+                    {Object.entries(entry.children).map(([childSlug, name]) => (
+                      <li key={`${slug}/${childSlug}`} className="my-0.5">
+                        <a
+                          href={`/manual/${slug}/${childSlug}`}
+                          className="text-gray-900 hover:text-gray-600 font-normal"
+                        >
+                          {name}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                ) : null}
               </li>
-            </ol>
-          </li>
+            );
+          })}
         </ol>
       </nav>
     </div>
